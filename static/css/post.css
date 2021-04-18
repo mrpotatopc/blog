@@ -1,0 +1,35 @@
+.post_video{
+  max-width: 100%
+}
+#pizdanutiis_class{
+  color:white;
+}
+textarea {
+  resize: none;
+  color:white;
+  background-color: #282C34;
+}
+.leave_comment{
+  color: white;
+  background-color: #282C34;
+  border: none;
+}
+textarea{
+  max-width: 100%;
+}
+.carousel-control-prev{
+  height: 30%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.carousel-control-next{
+  height: 30%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}

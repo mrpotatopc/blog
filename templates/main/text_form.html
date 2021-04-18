@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{view.action}}{% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+<div class="container mt-3">
+  <h1>{{view.action}}</h1>
+  <form method="post" action="." enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{form|crispy}}
+
+
+      <input class="btn btn-outline-secondary btn-light mt-3" type="submit" value="confirm">
+    <a href="{% url 'main:home' %}">
+      <button type="button" name="button" class="btn btn-outline-secondary btn-light mt-3">atcelt</button>
+    </a>
+
+  </form>
+
+</div>
+{% endblock %}

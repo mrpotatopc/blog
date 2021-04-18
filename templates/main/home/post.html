@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/post.css' %}?{% now 'U' %}">
+{% endblock %}
+{% block content %}
+{% if user.is_superuser %}
+  <div class="dropdown">
+    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      admin
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a  href="{% url 'main:delete_post' post.pk %}"class="dropdown-item">delete</a></li>
+      <li><a href="{% url 'main:update_post' post.pk %}"class="dropdown-item">edit</a></li>
+    </ul>
+  </div>
+{% endif %}
+  <div class="container mt-3">
+    <div class="card text-white bg-dark mb-3">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{post.Img.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+          </div>
+          {% if post.Img2 %}
+            <div class="carousel-item">
+              <img src="{{post.Img2.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img3 %}
+            <div class="carousel-item">
+              <img src="{{post.Img3.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img4 %}
+            <div class="carousel-item">
+              <img src="{{post.Img4.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img5 %}
+            <div class="carousel-item">
+              <img src="{{post.Img5.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img6 %}
+            <div class="carousel-item">
+              <img src="{{post.Img6.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img7 %}
+            <div class="carousel-item">
+              <img src="{{post.Img7.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img8 %}
+            <div class="carousel-item">
+              <img src="{{post.Img8.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img9 %}
+            <div class="carousel-item">
+              <img src="{{post.Img9.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.Img10 %}
+            <div class="carousel-item">
+              <img src="{{post.Img10.url}}" class="d-block w-100" alt="{{post.Img.url}}">
+            </div>
+          {% endif %}
+          {% if post.video %}
+            <div class="carousel-item">
+              <video controls class="post_video" >
+                <source src="{{post.video.url}}" type="video/mp4" >
+              </video>
+            </div>
+          {% endif %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"  data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">{{post.name}}</h1>
+        <p class="card-text">{{post.description}}</p>
+        {% if post.link %}
+          <a href="{{post.link}}" target="_blank" >{{post.link}}</a>
+        {% endif %}
+        {% if post.audio %}
+          <audio controls>
+            <source src="{{post.audio.url}}" type="audio/mpeg">
+          </audio>
+        {% endif %}
+        {% if post.file %}
+          <a href="{{post.file.url}}" download>Download</a>
+        {% endif %}
+        <hr>
+        {% if user.is_authenticated %}
+        <form class="" action="{% url 'main:leave_comment' theme.theme_slug  post.post_slug %}" method="post">
+          {% csrf_token %}
+          <textarea name="TEXT" rows="8" cols="80"></textarea>
+          <button type="submit" name="button" class="leave_comment">leave comment
+          </button>
+        </form>
+        {% else %}
+         to leave comment you must login
+        {% endif %}
+        <hr>
+        <ul class="list-group mt-3">
+          {% if comments %}
+            {% for c in comments %}
+              <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action bg-dark" id="pizdanutiis_class">{{c.user}}:    {{c.text}}
+                {% if user == c.user %}
+                  <a href="{% url 'main:delete_comment' c.pk %}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">delete</button>
+                  </a>
+                {% elif user.is_superuser %}
+
+                  <a href="{% url 'main:delete_comment' c.pk %}">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">delete</button>
+                  </a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% else %}
+            no comments found
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
