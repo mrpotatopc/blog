@@ -26,10 +26,10 @@
               <img src="{{p.image_medium.url}}" class="card-img-top" alt="image here"  >
               <div class="card-body">
                 <h5 class="card-title">{{p.name}} <span class="badge rounded-pill bg-primary">views:{{p.post_views}}</span></h5>
-                <a href="{% url 'main:post' theme.theme_slug  p.post_slug   %}" class="btn btn-dark">view</a>
+                <a href="{% url 'main:post' theme.theme_slug  p.post_slug   %}" class="btn btn-outline-light">view</a>
                 {% if user.is_superuser %}
-                  <a href="{% url 'main:delete_post' p.pk  %}" class="btn btn-dark">delete</a>
-                  <a href="{% url 'main:update_post' p.pk  %}" class="btn btn-dark">edit</a>
+                  <a href="{% url 'main:delete_post' p.pk  %}" class="btn btn-outline-light">delete</a>
+                  <a href="{% url 'main:update_post' p.pk  %}" class="btn btn-outline-light">edit</a>
                 {% endif %}
               </div>
             </div>

@@ -89,7 +89,9 @@
         <h1 class="card-title">{{post.name}}</h1>
         <p class="card-text">{{post.description}}</p>
         {% if post.link %}
-          <a href="{{post.link}}" target="_blank" >{{post.link}}</a>
+          <div style="margin: 5px;">
+              <a href="{{post.link}}" target="_blank" >{{post.link}}</a>
+          </div>
         {% endif %}
         {% if post.audio %}
           <audio controls>
